@@ -23,19 +23,10 @@ body {
 	flex: 1;
 }
 
-p {
-	margin: 0;
-	padding: 0;
-}
-
 a {
 	&:hover {
 		cursor: pointer;
 	}
-}
-
-button {
-  color: red;
 }
 
 .matchArea {

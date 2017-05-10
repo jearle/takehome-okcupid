@@ -31,6 +31,8 @@ export const SET_ANSWER = 'MADLIBS.SET_ANSWER';
 export const GENERATE_ESSAY = 'MADLIBS.GENERATE_ESSAY';
 export const SET_ESSAY_TEXT_SENTENCE = 'MADLIBS.SET_ESSAY_TEXT_SENTENCE';
 export const SET_ESSAY_TEXT = 'MADLIBS.SET_ESSAY_TEXT';
+export const SHOW_EDIT_SCREEN = 'MADLIBS.SHOW_EDIT_SCREEN';
+export const RESET_TO_INITIAL_STATE = 'MADLIBS.RESET_TO_INITIAL_STATE';
 
 
 // Initial state
@@ -41,6 +43,9 @@ export const INITIAL_STATE = {
 
   essayText: '',
   essayTextSentences: new Array(getOrderedFieldNames().length).fill(''),
+
+  shouldShowEditButton: false,
+  shouldShowEditScreen: false,
 };
 
 
@@ -77,9 +82,23 @@ export function reducer(state = INITIAL_STATE, action) {
       return {
         ...state,
         essayText: action.payload.essayText,
+        shouldShowEditButton: state
+          .essayTextSentences
+          .reduce((current, next) => current === false ? false : (next.length > 0), true),
       };
     }
 
+    case SHOW_EDIT_SCREEN: {
+      return {
+        ...state,
+        shouldShowEditScreen: true,
+      };
+    }
+
+    case RESET_TO_INITIAL_STATE: {
+      return INITIAL_STATE;
+    }
+    
     default:
       return state;
   }
@@ -117,4 +136,13 @@ export const setEssayText = ({ essayText }) => ({
   payload: {
     essayText,
   },
+});
+
+export const showEditScreen = () => ({
+  type: SHOW_EDIT_SCREEN,
+});
+
+
+export const resetToInitialState = () => ({
+  type: RESET_TO_INITIAL_STATE,
 });

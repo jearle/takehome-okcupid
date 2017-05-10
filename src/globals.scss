@@ -25,3 +25,12 @@ input {
   border-radius: 3px;
   box-sizing: border-box;
 }
+
+button {
+  background: $green;
+  color: white;
+  border: 0;
+  border-radius: 3px;
+  font-size: 1em;
+  padding: 15px 55px;
+}

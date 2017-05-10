@@ -4,3 +4,17 @@
   flex: 1;
   padding: 40px;
 }
+
+p {
+  margin-bottom: 130px;
+}
+
+button {
+  outline: none;
+  transition: all .5s;
+  opacity: 1;
+
+  &.hide {
+    opacity: 0;
+  }
+}

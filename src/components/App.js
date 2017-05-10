@@ -3,8 +3,12 @@ import { connect } from 'react-redux';
 import { 
   setAnswer,
   generateEssay,
+  showEditScreen,
+  setEssayText,
+  resetToInitialState,
 } from '../madlibs';
 
+import Edit from './Edit';
 import Prompts from './Prompts';
 import GeneratedEssay from './GeneratedEssay';
 
@@ -39,11 +43,49 @@ class App extends Component {
     dispatch(generateEssay({ fieldName }));
   }
 
+  handleOnEditButtonClick = () => {
+    const {
+      dispatch,
+    } = this.props;
+
+    dispatch(showEditScreen());
+  }
+
+  handleOnEssayTextChange = (essayText) => {
+    const {
+      dispatch,
+    } = this.props;
+
+    dispatch(setEssayText({ essayText }));
+  }
+
+  handleOnStartOver = () => {
+    const {
+      dispatch,
+    } = this.props;
+
+    dispatch(resetToInitialState());
+  }
+
   render() {
     const {
       fields,
       essayText,
+      shouldShowEditButton,
+      shouldShowEditScreen,
     } = this.props;
+    
+    if (shouldShowEditScreen) {
+      return (
+        <div className="matchArea">
+          <Edit
+            essayText={essayText}
+            onChange={this.handleOnEssayTextChange}
+            onStartOver={this.handleOnStartOver}
+          />
+        </div>
+      );
+    }
 
     return (
       <div className="matchArea">
@@ -54,6 +96,8 @@ class App extends Component {
         />
         <GeneratedEssay
           essayText={essayText}
+          shouldShowEditButton={shouldShowEditButton}
+          onEditButtonClick={this.handleOnEditButtonClick}
         />
       </div>
     );
