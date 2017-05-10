@@ -6,13 +6,19 @@ import {
 
 import {
   GENERATE_ESSAY,
+  SET_ESSAY_TEXT_SENTENCE,
+
   setEssayTextSentence,
+  setEssayText,
 } from './madlibs';
 
 import {
   getTextTemplate,
 } from './constants';
 
+
+// Helpers
+// ----------------------------------------------------------------------------
 
 const getRandomIndexWithLength = (length) => 
   Math.floor(Math.random() * length);
@@ -30,7 +36,10 @@ const getFieldIndexWithFieldName = (fields, fieldName) => fields
   .reduce((current, field, i) => field.fieldName === fieldName ? i : current, -1);
 
 
-export function* setEssaySaga(action) {
+// Action sagas
+// ----------------------------------------------------------------------------
+
+export function* setEssayTextSentenceSaga(action) {
   const {
     fieldName,
   } = action.payload;
@@ -51,11 +60,29 @@ export function* setEssaySaga(action) {
   }));
 }
 
+export function* setEssaySaga() {
+  const {
+    essayTextSentences,
+  } = yield select((state) => state);
+
+  const essayText = essayTextSentences.join(' ');
+
+  yield put(setEssayText({ essayText }));
+}
+
+// Listener Sagas
+// ----------------------------------------------------------------------------
+
 export function* takeLatestGenerateEssaySaga() {
-  yield takeLatest(GENERATE_ESSAY, setEssaySaga);
+  yield takeLatest(GENERATE_ESSAY, setEssayTextSentenceSaga);
+}
+
+export function* takeLatestSetEssayTextSentenceSaga() {
+  yield takeLatest(SET_ESSAY_TEXT_SENTENCE, setEssaySaga);
 }
 
 
 export default [
   takeLatestGenerateEssaySaga,
+  takeLatestSetEssayTextSentenceSaga,
 ];

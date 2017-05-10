@@ -30,6 +30,7 @@ const generateOrderedFields = () => getOrderedFieldNames()
 export const SET_ANSWER = 'MADLIBS.SET_ANSWER';
 export const GENERATE_ESSAY = 'MADLIBS.GENERATE_ESSAY';
 export const SET_ESSAY_TEXT_SENTENCE = 'MADLIBS.SET_ESSAY_TEXT_SENTENCE';
+export const SET_ESSAY_TEXT = 'MADLIBS.SET_ESSAY_TEXT';
 
 
 // Initial state
@@ -59,7 +60,25 @@ export function reducer(state = INITIAL_STATE, action) {
               answer: action.payload.answer,
             } : field),
       };
-    }    
+    }
+
+    case SET_ESSAY_TEXT_SENTENCE: {
+      return {
+        ...state,
+        essayTextSentences: state
+          .essayTextSentences
+          .map((sentence, i) => i === action.payload.index ? 
+            action.payload.essayTextSentence : 
+            sentence),
+      };
+    }
+
+    case SET_ESSAY_TEXT: {
+      return {
+        ...state,
+        essayText: action.payload.essayText,
+      };
+    }
 
     default:
       return state;
@@ -90,5 +109,12 @@ export const setEssayTextSentence = ({ essayTextSentence, index }) => ({
   payload: {
     essayTextSentence,
     index,
+  },
+});
+
+export const setEssayText = ({ essayText }) => ({
+  type: SET_ESSAY_TEXT,
+  payload: {
+    essayText,
   },
 });
