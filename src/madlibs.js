@@ -53,7 +53,6 @@ export const INITIAL_STATE = {
 // ----------------------------------------------------------------------------
 
 export function reducer(state = INITIAL_STATE, action) {
-  console.log(action);
   switch (action.type) {
     case SET_ANSWER: {
       return {
@@ -98,7 +97,7 @@ export function reducer(state = INITIAL_STATE, action) {
     case RESET_TO_INITIAL_STATE: {
       return INITIAL_STATE;
     }
-    
+
     default:
       return state;
   }
