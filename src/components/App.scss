@@ -1,0 +1,46 @@
+$white: #fafbfd;
+$grey: #f3f5f9;
+$blue: #084aa4;
+$darkGrey: #484f60;
+$green: #00d57f;
+
+$bodyPadding: 45px;
+
+html, body, #root, .matchArea {
+	height: 100%;
+	margin: 0;
+	padding: 0;
+}
+
+body {
+	background: $blue;
+	padding: $bodyPadding;
+	font-family: sans-serif;
+	box-sizing: border-box;
+}
+
+#root {
+	flex: 1;
+}
+
+p {
+	margin: 0;
+	padding: 0;
+}
+
+a {
+	&:hover {
+		cursor: pointer;
+	}
+}
+
+button {
+  color: red;
+}
+
+.matchArea {
+	background: $white;
+	border-radius: 3px;
+	box-sizing: border-box;
+	padding: 40px;
+}
