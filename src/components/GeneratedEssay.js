@@ -2,6 +2,8 @@ import React, { PropTypes } from 'react';
 
 require('./GeneratedEssay.scss');
 
+const onClickHandler = (onClick, shouldShowEditButton) => !shouldShowEditButton ? () => undefined  : onClick
+
 const GeneratedEssay = ({ essayText, shouldShowEditButton, onEditButtonClick }) => (
   <div className={`generateEssay`}>
     <h1>
@@ -12,8 +14,7 @@ const GeneratedEssay = ({ essayText, shouldShowEditButton, onEditButtonClick }) 
     </p>
     <button
       className={`${shouldShowEditButton || 'hide'}`}
-      disabled={!shouldShowEditButton}
-      onClick={onEditButtonClick}
+      onClick={onClickHandler(onEditButtonClick, shouldShowEditButton)}
     >
       Edit
     </button>

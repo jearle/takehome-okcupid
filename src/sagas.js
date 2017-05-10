@@ -26,8 +26,11 @@ const getRandomIndexWithLength = (length) =>
 const getRandomItemFromArray = (array) => 
   array[getRandomIndexWithLength(array.length)];
 
+const capitalizeFirstLetter = (string) =>
+  `${string.charAt(0).toUpperCase()}${string.slice(1)}`;
+
 const addAnswerToTemplate = (template, answer) =>
-  template.replace(/\$answer/, answer);
+  capitalizeFirstLetter(template.replace(/\$answer/, answer));
 
 const getAnswerWithFieldName = (fields, fieldName) => fields
   .reduce((current, field) => field.fieldName === fieldName ? field.answer : current, '');
@@ -52,7 +55,7 @@ export function* setEssayTextSentenceSaga(action) {
   const template = getRandomItemFromArray(getTextTemplate(fieldName));
 
   const index = getFieldIndexWithFieldName(fields, fieldName);
-  const essayTextSentence = addAnswerToTemplate(template, answer);
+  const essayTextSentence = answer === '' ? '' : addAnswerToTemplate(template, answer);
 
   yield put(setEssayTextSentence({
     essayTextSentence,
