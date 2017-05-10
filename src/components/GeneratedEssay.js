@@ -1,7 +1,9 @@
 import React, { PropTypes } from 'react';
 
+require('./GeneratedEssay.scss');
+
 const GeneratedEssay = ({ essayText }) => (
-  <div>
+  <div className={`generateEssay`}>
     <h1>
       Your essay text
     </h1>

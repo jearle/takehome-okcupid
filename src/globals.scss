@@ -1,0 +1,27 @@
+@import "./colors.scss";
+
+h1 {
+  font-size: 1.4em;
+  font-weight: 500;
+  color: $dark-grey;
+}
+
+label, input {
+  display: block;
+  color: $dark-grey;
+}
+
+label {
+  padding: 10px 0px;
+  font-size: 1.2em;
+}
+
+input {
+  width: 100%;
+  border: none;
+  font-size: 1.1em;
+  padding: 10px;
+  outline: none;
+  border-radius: 3px;
+  box-sizing: border-box;
+}

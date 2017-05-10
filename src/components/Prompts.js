@@ -1,6 +1,8 @@
 import React, { PropTypes } from 'react';
 import QuestionGroup from './QuestionGroup';
 
+require('./Prompts.scss');
+
 const curryOnBlur = (onBlur, fieldName) => () => onBlur(fieldName);
 
 const createQuestionGroups = ({ fields, onChange, onBlur }) => fields
@@ -16,7 +18,7 @@ const createQuestionGroups = ({ fields, onChange, onBlur }) => fields
   ));
 
 const Prompts = ({ fields, onChange, onBlur }) => (
-  <div>
+  <div className={`prompts`}>
     <h1>
       About Me
     </h1>
